@@ -18,7 +18,7 @@ class form {
 			// Iterate through the values and return them
 			foreach ($val as $key => $value) {
 				// create form element with $value and append to $res
-				$res .= '<input type="radio" name="'.$name.'" class="'.$class.'" value="'.$value.'">'. $value .'<br />';
+				$res .= '<input type="'.$type.'" name="'.$name.'" class="'.$class.'" value="'.$value.'">'. $value .'<br />';
 			}
 		} else if ($type='textarea') {
 			//take textarea measurement from form val[] array
