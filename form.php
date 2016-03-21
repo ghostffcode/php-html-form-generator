@@ -14,7 +14,7 @@ class form {
 				$res .= '<option value="'.$value.'">'.$value.'</option>';
 			}
 			$res .= '</select>';
-		} else if ($type == 'radio') {
+		} else if ($type == 'radio' || $type == 'checkbox') {
 			// Iterate through the values and return them
 			foreach ($val as $key => $value) {
 				// create form element with $value and append to $res
