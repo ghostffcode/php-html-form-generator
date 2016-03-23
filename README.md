@@ -1,2 +1,2 @@
 # phpform
-This PHP script generates full functional HTML form
+This PHP script generates fully functional HTML form
