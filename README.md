@@ -27,6 +27,6 @@ This PHP script generates fully functional HTML form
 	
 	$form->cfElement('text', 'username', 'myTextbox', []); // This creates a textbox
 	
-	$form->cfElement('password', 'uPassword', 'myPassword', []); // This creates a textarea
+	$form->cfElement('password', 'uPassword', 'myPassword', []); // This creates a password field
 ?>
 ```
