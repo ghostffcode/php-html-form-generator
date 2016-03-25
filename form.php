@@ -20,7 +20,7 @@ class form {
 				// create form element with $value and append to $res
 				$res .= '<input type="'.$type.'" name="'.$name.'" class="'.$class.'" value="'.$value.'">'. $value .'<br />';
 			}
-		} else if ($type='textarea') {
+		} else if ($type =='textarea') {
 			//take textarea measurement from form val[] array
 			$res = '<textarea name="'.$type.'" name="'.$name.'" class="'.$class.'" row="'.$val[0].'" col="'.$val[1].'"></textarea>';
 		} else {
