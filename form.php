@@ -22,7 +22,7 @@ class form {
 			}
 		} else if ($type='textarea') {
 			//take textarea measurement from form val[] array
-			$res = '<textarea name="'.$name.'" class="'.$class.'" row="'.$val[0].'" col="'.$val[1].'"></textarea>';
+			$res = '<textarea name="'.$type.'" name="'.$name.'" class="'.$class.'" row="'.$val[0].'" col="'.$val[1].'"></textarea>';
 		} else {
 			$res = '<input type="'.$type.'" name="'.$name.'" class="'.$class.'">';
 		}
