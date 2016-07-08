@@ -20,7 +20,6 @@ $Form = $form->createForm('post', 'index.php')
 echo $Form;
 
 //assigning values
-$option = 
 $Form = $form->createForm('post', 'index.php')
              ->text('fname')->val('foo')
              ->text('lname')->val('bar')
@@ -66,15 +65,14 @@ echo $Form;
 //an empty form with post method
 $Form = $form->createForm('post')
                ->make();
-echo $Form;
 //outputs <form method="post"></form>
 
 
 //an empty form with post method and action
 $Form = $form->createForm('post', 'proceess.php')
                ->make();
-echo $Form;
 //outputs <form method="post" action="proceess.php"></form>
+
 
 //there are two ways to use attribute
 //1: array (faster) eg (array('class' => 'myclass', 'id' => 'myid'))
@@ -87,36 +85,38 @@ $attr = array('class'       => 'new_class',
              );
 $Form = $form->createForm('post', 'proceess.php', $attr) //or $form->createForm('post', null, $attr)
                ->make();
-echo $Form;
 //outputs <form method="post" action="proceess.php" class="new_class" id="new_id" data_id="new_dataId"></form>
 
 //USING String
 $attr = 'class:new_class, id:new_id, data_id:new_dataId';
 $Form = $form->createForm('post', 'proceess.php', $attr) //or $form->createForm('post', null, $attr)
                ->make();
-echo $Form;
 //outputs <form method="post" action="proceess.php" class="new_class" id="new_id" data_id="new_dataId"></form>
+
+
+
+///------------------------------------------------------------------------------------------------------------------------
+
 
 //using inputs
 /*
-button, checkbox, color, date, datetime-local, email, file, hidden, image, month, number, 
-password, radio, range, reset, search, submit, tel, text, time, url, week
+methods 
+	button, checkbox, color, date, datetime-local, email, file, hidden, image, month, number, 
+	password, radio, range, reset, search, submit, tel, text, time, url, week
 
 */
 
 //creat a form with an input type of text and name of usernmae
 $Form = $form->createForm('post')
              ->text('username')
-               ->make();
-echo $Form;
+             ->make();
 //outputs <form method="post"><input type="text" name="username"></form>
 
 //passing attributes to input
 $Form = $form->createForm('post')
              ->text('firstname', array('class' => 'fname'))
              ->text('lastname', 'class:lastname')
-               ->make();
-echo $Form;
+             ->make();
 /*
 outputs
     <form method="post">
@@ -130,8 +130,7 @@ $Form = $form->createForm('post')
              ->text('username')
              ->email('email')
              ->password('password')
-               ->make();
-echo $Form;
+             ->make();
 /*
 outputs
     <form method="post">
@@ -148,23 +147,29 @@ outputs
 
 //USING ATTRIBUTES
 $Form = $form->text('username', array('value' => 'foo')) //or $form->text('username', 'value:foo')
-               ->make();
-echo $Form;
+             ->make();
 //outputs <input type="text" name="username" value="foo">
 
 //USING CONSTRAIN
 $Form = $form->text('username')->val('foo')
-               ->make();
-echo $Form;
+             ->make();
 //outputs <input type="text" name="username" value="foo">
+
+
+
+///------------------------------------------------------------------------------------------------------------------------
 
 
 //using the custom method
 
 $Form = $form->custom('<input type="text" name="usernmae" class="newclass">')
-               ->make();
-echo $Form;
+             ->make();
 //outputs <input type="text" name="usernmae" class="newclass">
+
+
+
+
+///------------------------------------------------------------------------------------------------------------------------
 
 
 //using select 
@@ -175,13 +180,12 @@ echo $Form;
 */
 
 $Form = $form->select('days')
-               ->make();
-echo $Form;
+             ->make();
 //outputs <select name="days">
+
 //wtih attribute
 $Form = $form->select('days', array('class' => 'newclass')) // or  $form->select('days', 'class:newclass')
-               ->make();
-echo $Form;
+             ->make();
 //output <select name="days" class="newclass">
 
 //adding options
@@ -191,8 +195,7 @@ $option = array('volvo' => 'Volvo',
                );
 $Form = $form->select('days', array('class' => 'newclass')) // or  $form->select('days', 'class:newclass')
              ->options($option)
-               ->make();
-echo $Form;
+             ->make();
 /*
     outputs
     <select name="days" class="newclass">
@@ -208,7 +211,7 @@ echo $Form;
 //@param selected 
 $Form = $form->select('days', array('class' => 'newclass')) // or  $form->select('days', 'class:newclass')
              ->optionsRange(2, 5, 3) //were 3 is the selected value
-               ->make();
+             ->make();
 echo $Form;
 /*
     outputs
@@ -225,8 +228,7 @@ echo $Form;
 //@param name of selected month
 $Form = $form->select('days', array('class' => 'newclass')) // or  $form->select('days', 'class:newclass')
              ->optionsMonth('ABR', 'Feb')
-               ->make();
-echo $Form;
+             ->make();
 /*
     outputs
     <select name="days" class="newclass">
@@ -238,7 +240,7 @@ echo $Form;
 
 $Form = $form->select('days', array('class' => 'newclass')) // or  $form->select('days', 'class:newclass')
              ->optionsMonth(null, 'March')
-               ->make();
+             ->make();
 echo $Form;
 /*
     outputs
@@ -252,11 +254,14 @@ echo $Form;
     </select>
 */
 
+
+///------------------------------------------------------------------------------------------------------------------------
+
+
 //label
 //@param for
 //@param content
 $Form = $form->label('email', 'Email Address')
-               ->make();
-echo $Form
+             ->make();
 //output <label for="emai">Email Address</label>
 ?>
