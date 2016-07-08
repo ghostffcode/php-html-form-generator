@@ -3,7 +3,6 @@ This PHP script generates fully functional HTML form
 
 ```php
 <?php
-
 require 'Form.php';
 
 $form = new Form;
@@ -44,15 +43,15 @@ $Form = $form->createForm('post', 'index.php')
 echo $Form;
 
 //assigning attribute
-//array array('class' => 'clsname', 'id' => 'idname', 'data-type' => 'dataname')
-//is same as
-//string 'class:clsname, id:idname, data-type:dataname'
+//array: array('class' => 'clsname', 'id' => 'idname', 'data-type' => 'dataname')
+//  is same as
+//string: 'class:clsname, id:idname, data-type:dataname'
 
-$Form = $form->createForm('post', 'index.php', array('class' => 'newclass')) //array atrribute method
-             ->text('fname', 'class:fnameclass') //string atrribute method
-             ->text('lname', array('class' => 'lnameclass')) //array atrribute method
-             ->email('email', 'class:emailclass') //string atrribute method
-             ->password('password', array('class' => 'passwordclass')) //array atrribute method
+$Form = $form->createForm('post', 'index.php', array('id' => 'formid'))
+             ->text('fname', 'id:fnameid')
+             ->text('lname', array('id' => 'lnameid'))
+             ->email('email', 'id:emailid')
+             ->password('password', array('id' => 'passwordid'))
              ->hidden('token')
              ->select('month')->optionsMonth()
              ->label('custom', 'your custom input')
@@ -94,13 +93,13 @@ $Form = $form->createForm('post', 'index.php')
 
 //an empty form with post method
 $Form = $form->createForm('post')
-               ->make();
+             ->make();
 //outputs <form method="post"></form>
 
 
 //an empty form with post method and action
 $Form = $form->createForm('post', 'proceess.php')
-               ->make();
+             ->make();
 //outputs <form method="post" action="proceess.php"></form>
 
 
@@ -109,8 +108,8 @@ $Form = $form->createForm('post', 'proceess.php')
 //2: string        eg ('class:myclass, 'id:myid')
 
 //USING ARRAY
-$attr = array('class'       => 'new_class',
-              'id'            => 'new_id',
+$attr = array('class'   => 'new_class',
+              'id'      => 'new_id',
               'data_id' => 'new_dataId'
              );
 $Form = $form->createForm('post', 'proceess.php', $attr) //or $form->createForm('post', null, $attr)
