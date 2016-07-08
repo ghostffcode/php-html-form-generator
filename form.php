@@ -84,27 +84,27 @@ class Form
     private function makeOptionRange($from, $to, $selected = null)
     {
         $arrangment = null;
-		if ($from <= $to) {
-			for($i = $from; $i <= $to; $i++)
-			{
-				$select = null;
-				if ($i == $selected) {
-					$select = ' selected';
-				}
-				$arrangment .= PHP_EOL . '<option value="' . $i . '"' .
-							  $select . '>' . $i .'</option>';
-			}
-		}
-		else {
-			for ($i = $from; $i >= $to; $i--) {
-				$select = null;
-				if ($i == $selected) {
-					$select = ' selected';
-				}
-				$arrangment .= PHP_EOL . '<option value="' . $i . '"' .
-							  $select . '>' . $i .'</option>';
-			}
-		}
+        if ($from <= $to) {
+            for($i = $from; $i <= $to; $i++)
+            {
+                $select = null;
+                if ($i == $selected) {
+                    $select = ' selected';
+                }
+                $arrangment .= PHP_EOL . '<option value="' . $i . '"' .
+                              $select . '>' . $i .'</option>';
+            }
+        }
+        else {
+            for ($i = $from; $i >= $to; $i--) {
+                $select = null;
+                if ($i == $selected) {
+                    $select = ' selected';
+                }
+                $arrangment .= PHP_EOL . '<option value="' . $i . '"' .
+                              $select . '>' . $i .'</option>';
+            }
+        }
         return $arrangment;
     }
     
@@ -593,9 +593,9 @@ class Form
         }
         unset($this->rendered);
         $this->is_form = null;
-		if (!$is_html){
-			$form = htmlspecialchars($form, $flag);
-		}
+        if (!$is_html){
+            $form = htmlspecialchars($form, $flag);
+        }
         return $form;
     }
 
