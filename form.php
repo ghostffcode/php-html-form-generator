@@ -576,7 +576,7 @@ class Form
     *
     * @return string
     */
-    public function make()
+    public function make($is_html = true, $flag = null)
     {
         $form = implode(PHP_EOL, $this->rendered);
         for ($i = 0; $i < $this->is_form; $i++) {
@@ -584,6 +584,9 @@ class Form
         }
         unset($this->rendered);
         $this->is_form = null;
+		if (!$is_html){
+			$form = htmlspecialchars($form, $flag);
+		}
         return $form;
     }
 

@@ -3,6 +3,7 @@ This PHP script generates fully functional HTML form
 
 ```php
 <?php
+
 require 'Form.php';
 
 $form = new Form;
@@ -63,6 +64,31 @@ $Form = $form->createForm('post', 'index.php', array('class' => 'newclass')) //a
 echo $Form;
 
 
+
+//make method
+//->make(bool)
+//:default true return html value
+//false: return HTML entities
+$Form = $form->createForm('post', 'index.php')
+             ->text('fname')
+			 ->make(false);
+/*
+	outputs
+	&lt;form method="post" action="index.php"&gt;
+	&lt;input type="text" name="fname"&gt;
+	&lt;/form&gt;
+
+*/
+//you can also use the php predfined constant flags
+//http://php.net/manual/en/function.htmlspecialchars.php
+$Form = $form->createForm('post', 'index.php')
+             ->text('fname')
+			 ->make(false, ENT_COMPAT);
+
+
+
+
+///------------------------------------------------------------------------------------------------------------------------
 
 
 
