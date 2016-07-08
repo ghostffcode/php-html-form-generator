@@ -84,15 +84,27 @@ class Form
     private function makeOptionRange($from, $to, $selected = null)
     {
         $arrangment = null;
-        for($i = $from; $i <= $to; $i++)
-        {
-            $select = null;
-            if ($i == $selected) {
-                $select = ' selected';
-            }
-            $arrangment .= PHP_EOL . '<option value="' . $i . '"' .
-                          $select . '>' . $i .'</option>';
-        }
+		if ($from <= $to) {
+			for($i = $from; $i <= $to; $i++)
+			{
+				$select = null;
+				if ($i == $selected) {
+					$select = ' selected';
+				}
+				$arrangment .= PHP_EOL . '<option value="' . $i . '"' .
+							  $select . '>' . $i .'</option>';
+			}
+		}
+		else {
+			for ($i = $from; $i >= $to; $i--) {
+				$select = null;
+				if ($i == $selected) {
+					$select = ' selected';
+				}
+				$arrangment .= PHP_EOL . '<option value="' . $i . '"' .
+							  $select . '>' . $i .'</option>';
+			}
+		}
         return $arrangment;
     }
     
@@ -525,7 +537,6 @@ class Form
             $this->rendered[] = '</select>';
         }
         else {
-            array_pop($this->rendered);
             $this->rendered[] = 'Option method is expected to be called right after select method';
         }
         return $this;
@@ -545,7 +556,6 @@ class Form
             $this->rendered[] = '</select>';
         }
         else {
-            array_pop($this->rendered);
             $this->rendered[] = 'Option method is expected to be called right after select method';
         }
         return $this;
@@ -565,7 +575,6 @@ class Form
             $this->rendered[] = '</select>';
         }
         else {
-            array_pop($this->rendered);
             $this->rendered[] = 'Option method is expected to be called right after select method';
         }
         return $this;
