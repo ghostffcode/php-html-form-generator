@@ -599,6 +599,4 @@ class Form
         return $form;
     }
 
-    
 }
-?>
