@@ -37,7 +37,7 @@ $Form = $form->createForm('post', 'index.php')
              ->label('custom', 'your custom input')
              ->custom('<input type="text" name="custom">')
              ->checkbox('TOS')
-             ->submit('submit')->val('Submit Form')
+             ->BSubmit('submit')->val('Submit Form')
              ->make();
 
 echo $Form;
@@ -293,5 +293,35 @@ echo $Form;
 $Form = $form->label('email', 'Email Address')
              ->make();
 //output <label for="emai">Email Address</label>
+
+
+///------------------------------------------------------------------------------------------------------------------------
+
+
+//using buttons 
+/*
+    BSubmit
+    BReset
+    
+    //@param (string) button name
+    //@param (string) button value
+    //@param (array | string) button attributes
+    
+    $Form = $form->BSubmit('submit')->val('Submit Here')
+             ->make();
+    
+   //outputs  <button type="submit" name="submit">Submit Here</button>
+   
+   $Form = $form->BSubmit('submit', 'class:btn_class')->val('Submit Here')
+             ->make();
+   //outputs <button type="submit" name="submit" class="btn_class">Submit Here</button>
+   
+    $Form = $form->BReset('reset')->val('Reset Here')
+             ->make();
+    
+   //outputs  <button type="reset" name="reset">Reset Here</button>
+   
+    
+*/
 ?>
 ```

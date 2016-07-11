@@ -177,8 +177,14 @@ class Form
     public function val($value)
     {
         $last = end($this->rendered);
-        $value = str_replace('>', ' value="' . $value . '">',
+        if (substr($last, 1, 6) == 'button') {        
+            $value = str_replace('></button>', '>' . $value .
+                 '</button>', $last);
+        }
+        elseif (substr($last, 1, 5) == 'input') {
+            $value = str_replace('>', ' value="' . $value . '">',
                     $last);
+        }
         array_pop($this->rendered);
         $this->rendered[] = $value;
         return $this;
@@ -498,11 +504,46 @@ class Form
     }
     
     /*
-    * Defines ur own custom form
+    * Defines a submit button
+    *
+    * @return null
+    * @param (string) button name
+    * @param (string) button value
+    * @param (array | string) button attributes
+    */
+    public function BSubmit($name = null, $attributes = null)
+    {
+        $name = ($name) ? ' name="' . $name . '"' : '';
+        $this->rendered[] = '<button type="submit"'. $name .
+                            $this->makeInputAttribute($attributes) .
+                            '></button>';
+        return $this;
+    }
+    
+    /*
+    * Defines a submit button
+    *
+    * @return null
+    * @param (string) button name
+    * @param (string) button value
+    * @param (array | string) button attributes
+    */
+    public function BReset($name = null, $attributes = null)
+    {
+        $name = ($name) ? ' name="' . $name . '"' : '';
+        $this->rendered[] = '<button type="reset"'. $name .
+                            $this->makeInputAttribute($attributes) .
+                            '></button>';
+        return $this;
+    }
+    
+     /*
+    * Defines your own custom form
     *
     * @return null
     * @param (string) input name
     */
+    
     public function custom($attributes)
     {
         $this->rendered[] = $attributes;
@@ -596,7 +637,8 @@ class Form
         if (!$is_html){
             $form = htmlspecialchars($form, $flag);
         }
+        //remove empty line
+        //$form = preg_replace("/[\r\n]+/", "\n", $form);
         return $form;
-    }
-
+    }    
 }
