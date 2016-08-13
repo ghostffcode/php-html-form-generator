@@ -1,11 +1,12 @@
 <?php
 
-//namespace Vendor\Helpers\Form;
-
-class Form
+class Form implements FormInterface
 {
     private $rendered = array();
+    
     private $is_form = null;
+    
+    const TOKEN = '__token';
     
     /*
     * make defined input attribute from array or string
@@ -141,9 +142,41 @@ class Form
         }
         return $arrangment;
     }
+    
+        /*
+    * Creates a random string
+    *
+    * @return string
+    * @param (string) name attribute of input
+    */
+    private function token($name)
+    {
+        $token = range('a', 'z');
+        $token = array_merge($token, range(1, 10));
+        $token = array_merge($token, range('A', 'Z'));
+        $token = array_merge($token, array('+~!@#$%&*_+=-'));
+        $token = implode('', $token);
+        $token = hash('sha512', str_shuffle($token));
+        
+        //assign token to a session eg:
+        // $_SESSION['Form/'.$name] = $token;
+        
+        return $token;
+    }
+    
     private function callInput($method, $name = null, $attribute = null)
     {
-        $name = ($name)? ' name="'.$name.'"' : '';
+        if (is_array($name)) {
+            if ($name['data'] == 'range') {
+                $new = (isset($name['name']))? ' name="'.$name['name'].'"' : '';
+                $new .= (isset($name['min']))? ' min="'.$name['min'].'"' : '';
+                $new .= (isset($name['max']))? ' max="'.$name['max'].'"' : '';
+            }
+            $name = $new;
+        }
+        else {
+            $name = ($name)? ' name="'.$name.'"' : '';
+        }
         $this->rendered[] = '<input type="' . $method . '"' . $name .
                           $this->makeInputAttribute($attribute) . '>';
     }
@@ -177,6 +210,17 @@ class Form
     public function val($value)
     {
         $last = end($this->rendered);
+        if ($value == self::TOKEN) {
+            $name = preg_match('/name=("|\')(.*?)("|\')/', $last, $matched);
+            if (! isset($matched[2])) {
+                die('a name must be assigned to '. self::TOKEN);
+            }
+            else {
+                $name = trim($matched[2]);
+                $value = $this->token($name);
+            }
+        }
+        
         if (substr($last, 1, 6) == 'button') {        
             $value = str_replace('></button>', '>' . $value .
                  '</button>', $last);
@@ -187,6 +231,7 @@ class Form
         }
         array_pop($this->rendered);
         $this->rendered[] = $value;
+        
         return $this;
     }
     
@@ -372,8 +417,13 @@ class Form
     * @param (string) input name
     * @param (array | string) inpute attributes
     */
-    public function range($name = null, $attribute = null)
+    public function range($name = null, $min = null, $max = null, $attribute = null)
     {
+        $name = array('name' => $name,
+                      'min'  => $min,
+                      'data' => 'range',
+                      'max'     => $max
+                    );
         $this->callInput('range', $name, $attribute);
         return $this;
     }
