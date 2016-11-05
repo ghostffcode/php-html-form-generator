@@ -1,24 +1,12 @@
 <?php
-require 'Form.php';
+require 'src/Form.php';
 
-$form = new Form;
+$form = new Form('index.php');
+echo $form->color()->rest();
 
-//simple usage
-$Form = $form->createForm('post', 'index.php')
-             ->text('fname')
-             ->text('lname')
-             ->email('email')
-             ->password('password')
-             ->hidden('token')
-             ->select('age')->optionsRange(15, 80)
-             ->label('custom', 'your custom input')
-             ->custom('<input type="text" name="custom">')
-             ->checkbox('TOS')
-             ->submit('submit')
-             ->make();
 
-echo $Form;
 
+/*
 //assigning values
 $Form = $form->createForm('post', 'index.php')
              ->text('fname')->val('foo')
@@ -57,5 +45,5 @@ $Form = $form->createForm('post', 'index.php', array('id' => 'formid'))
              ->make();
 
 echo $Form;
-
+*/
 ?>
